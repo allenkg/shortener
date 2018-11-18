@@ -33,7 +33,8 @@ export default createReducer({
     isLoading: false,
     shortLink: action.data.short_link,
     originalLink: action.data.orig_link,
-    linkId: action.data.id
+    linkId: action.data.id,
+    data: state.data.concat([action.data])
   }),
   [TRANSFORM_LINK_FAILURE]: (state, action) => merge(state, {
     isLoading: false,
@@ -47,6 +48,7 @@ export default createReducer({
     shortLink: '',
     originalLink: '',
     errors: action.errors,
+    data: state.data.slice(0,-1),
     linkId: null
   })
 }, INITIAL_STATE)

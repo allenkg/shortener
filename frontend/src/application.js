@@ -5,7 +5,6 @@ import { syncHistoryWithStore } from "react-router-redux";
 import { browserHistory } from "react-router";
 import configureStore from "./store";
 import Root from "./containers/Root";
-// import Api from "./api/api";
 
 export default class Application {
   static createApplication() {
@@ -13,7 +12,6 @@ export default class Application {
   }
 
   init() {
-    // this._createApi();
     this._createStore();
     this._createHistory();
     // this.enableHotReload();
@@ -23,12 +21,8 @@ export default class Application {
     this._renderMain();
   }
 
-  // _createApi() {
-  //   this.api = new Api();
-  // }
-
   _createStore() {
-    this.store = configureStore(this.api);
+    this.store = configureStore();
   }
 
   _createHistory() {

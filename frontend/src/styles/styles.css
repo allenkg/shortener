@@ -33,7 +33,7 @@
     width: 100px;
     height: 33px;
     color: white;
-    background-color: #F16534;
+    background-image: linear-gradient(-111deg, #F16534 4%, #ED3535 100%);
 }
 
 .delete-short-link {

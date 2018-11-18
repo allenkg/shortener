@@ -1,8 +1,6 @@
 import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
 import MainPageActions from '../actions/main-page';
-import PropTypes from 'prop-types';
-// export default (props) => props.children;
 import React from 'react';
 
 

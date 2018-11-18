@@ -6,7 +6,7 @@ class MainPage extends React.Component {
   static PropTypes = {
     data: PropTypes.array.isRequired,
     actions: PropTypes.shape({
-      fetchTestData: PropTypes.func.isRequired,
+      fetchUrls: PropTypes.func.isRequired,
 
       changeOriginalLink: PropTypes.func,
       convertToShortLink: PropTypes.func,
@@ -16,10 +16,11 @@ class MainPage extends React.Component {
   };
 
   componentDidMount() {
-    if (!this.props.authenticated)
+    const token = localStorage.getItem('token');
+    if (!this.props.authenticated && !token)
       browserHistory.push('/login');
     else
-      this.props.actions.fetchTestData();
+      this.props.actions.fetchUrls();
   }
 
   inputChangeHandler=(e)=>{
@@ -75,15 +76,15 @@ class MainPage extends React.Component {
         <div className="input-url-container">
             { this.props.shortLink.length === 0 ?
         <div className="original-link-input">
-          <input type="text" className="link-input" value={this.props.originalLink} placeholder="Past URL here" onChange={this.inputChangeHandler}/>
+          <input type="text" className="link-input" value={originalLink} placeholder="Past URL here" onChange={this.inputChangeHandler}/>
           <button className={isActive} onClick={this.convertToShort.bind(null, isActive)}> SHORTEN </button>
         </div> :
         <div className="short-link-input">
-            <input type="text" className="link-input" value={`shorten.com/${this.props.shortLink}`} placeholder="Past URL here" onChange={this.inputChangeHandler}/>
+            <input type="text" className="link-input" value={`shorten.com/${shortLink}`} placeholder="Past URL here" onChange={this.inputChangeHandler}/>
             <span className="delete-short-link" onClick={this.deleteLinkHandler.bind(this)}>X</span>
-            <button onClick={this.copyLinkAddress.bind(null, this.props.shortLink)}> COPY </button>
+            <button onClick={this.copyLinkAddress.bind(null, shortLink)}> COPY </button>
             <div>
-                <a href="#" onClick={this.redirectToUrl.bind(null, this.props.originalLink)}>{this.props.originalLink}</a> shortening
+                <a href="#" onClick={this.redirectToUrl.bind(null, originalLink)}>{originalLink}</a> shortening
             </div>
 
         </div>

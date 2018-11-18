@@ -1,4 +1,4 @@
-import { post } from "../api";
+import {post} from "../api";
 import {push} from 'react-router-redux';
 
 import {REQUEST_SUCCESS} from "./auth-page";
@@ -28,25 +28,27 @@ function changePassConf(confPass) {
 }
 
 function register() {
-    return (dispatch, getState) => {
-      dispatch({type: REQUEST_REGISTRATION});
-      const {name, email, password, confirmPassword } = getState().registerPage;
-      return post('/api/signup', {name, email, password, password_confirmation: confirmPassword })
-        .then((response) => {
-          console.log('RESPONSE ===> ', response);
-          const {auth_token, user} = response;
+  return (dispatch, getState) => {
+    dispatch({type: REQUEST_REGISTRATION});
+    const {name, email, password, confirmPassword} = getState().registerPage;
+    return post('/api/register', {name, email, password, password_confirmation: confirmPassword})
+      .then((response) => {
+        console.log('RESPONSE ===> ', response);
+        const {auth_token, user} = response;
 
-          dispatch({type: REQUEST_SUCCESS, auth_token});
-          localStorage.setItem('token', auth_token);
-          localStorage.setItem('user_name', user.name);
-          dispatch(push('/'));
-          dispatch({type: REQUEST_REGISTRATION_SUCCESS})
-        })
-        .catch((error) => {
-          return {type: REQUEST_REGISTRATION_FAILURE}
-        })
-    }
+        dispatch({type: REQUEST_SUCCESS, auth_token});
+        localStorage.setItem('token', auth_token);
+        localStorage.setItem('user_name', user.name);
+        localStorage.setItem('email', user.email);
+        dispatch(push('/'));
+        dispatch({type: REQUEST_REGISTRATION_SUCCESS})
+      })
+      .catch((errors) => {
+        return {type: REQUEST_REGISTRATION_FAILURE, errors}
+      })
+  }
 }
+
 export default {
   changeName,
   changeEmail,

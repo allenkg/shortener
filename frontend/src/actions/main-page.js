@@ -1,5 +1,4 @@
 import { get, post, remove} from "../api"
-import merge from 'xtend';
 
 export const FETCH_DATA = 'MAIN_PAGE/FETCH_DATA';
 export const FETCH_DATA_SUCCESS = 'MAIN_PAGE/FETCH_DATA_SUCCESS';
@@ -18,8 +17,8 @@ export const REDIRECT_TO = 'MAIN_PAGE/REDIRECT_TO';
 
 const url = '/api/links';
 
-function fetchTestData() {
-  return (dispatch, getState, api) => {
+function fetchUrls() {
+  return (dispatch) => {
     const token = localStorage.getItem('token');
     dispatch({type: FETCH_DATA});
 
@@ -40,10 +39,11 @@ function convertToShortLink() {
   return (dispatch, getState) => {
     dispatch({ type: TRANSFORM_LINK });
     const { originalLink } = getState().mainPage;
+    const token = localStorage.getItem('token');
     const payload = {
       orig_link: originalLink
     };
-    return post(url, payload)
+    return post(url, payload, token)
       .then((data) => {
         dispatch({ type: TRANSFORM_LINK_SUCCESS, data })
       })
@@ -54,7 +54,7 @@ function convertToShortLink() {
 }
 
 function redirectTo(urlId) {
-    return (dispatch, getState, api) => {
+    return (dispatch) => {
       const token = localStorage.getItem('token');
       dispatch({type: REDIRECT_TO});
 
@@ -69,11 +69,9 @@ function redirectTo(urlId) {
 function deleteLink(linkId) {
   return (dispatch, getState) => {
     dispatch({ type: DELETE_LINK });
+    const token = localStorage.getItem('token');
 
-    const payload = {
-        link_id: linkId
-    };
-    return remove(`${url}/${linkId}`, payload)
+    return remove(`${url}/${linkId}`, token)
       .then(() => {
           dispatch({ type: DELETE_LINK_SUCCESS })
       })
@@ -84,7 +82,7 @@ function deleteLink(linkId) {
 }
 
 export default {
-  fetchTestData,
+  fetchUrls,
   changeOriginalLink,
   convertToShortLink,
   redirectTo,
