@@ -13,7 +13,7 @@ export default class Api {
 
   convertUrl(payload) {
     return new Promise((resolve) => {
-      const data = this.makeRequest('POST', linksURL, payload);
+      const data = this.makeRequest('PUT', linksURL, payload);
       resolve(data)
     })
   }

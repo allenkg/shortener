@@ -1,15 +1,16 @@
 class LinksController < ApplicationController
-
-  before_action :set_link, only: [:show, :update, :destroy]
+  before_action :authorize_request
+  before_action :set_link, only: [:update, :destroy]
+  before_action :set_tracker, only: [:show]
 
   def index
     @links = Link.all
     json_response(@links)
-    # json_response([{first_name: 'Andrei', last_name: 'Iakhontov'}])
   end
 
   def show
-    json_response(@link)
+
+    redirect_to "#{@link.orig_link}"
   end
 
   def create
@@ -42,5 +43,8 @@ class LinksController < ApplicationController
     @link = Link.find(params[:id])
   end
 
+  def set_tracker
+    @link = Link.find(params[:id])
+  end
 
 end
