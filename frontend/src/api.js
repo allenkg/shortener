@@ -14,7 +14,7 @@ function parseJsonOrReturnPlain(payload) {
 }
 
 function getFetchParams(method, payload, token) {
-    const tokenHeaderPart = !!token ? { 'Authorization': `Bearer ${token}` } : {};
+    const tokenHeaderPart = !!token ? { 'Authorization': token } : {};
     const fetchParams = {
         method,
         headers: {

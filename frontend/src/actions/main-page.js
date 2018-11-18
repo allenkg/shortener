@@ -20,10 +20,10 @@ const url = '/api/links';
 
 function fetchTestData() {
   return (dispatch, getState, api) => {
-    // const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
     dispatch({type: FETCH_DATA});
 
-    return get(url)
+    return get(url, token)
       .then((data) => {
           dispatch({type: FETCH_DATA_SUCCESS, data});
       })
@@ -55,10 +55,10 @@ function convertToShortLink() {
 
 function redirectTo(urlId) {
     return (dispatch, getState, api) => {
-      // const token = localStorage.getItem('token');
+      const token = localStorage.getItem('token');
       dispatch({type: REDIRECT_TO});
 
-      return get(`${url}/${urlId}`)
+      return get(`${url}/${urlId}`, token)
         .then(() => {
             dispatch({ type: FETCH_DATA_SUCCESS });
         })
