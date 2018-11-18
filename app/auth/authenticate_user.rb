@@ -6,8 +6,6 @@ class AuthenticateUser
 
   # Service entry point
   def call
-    raise
-
     JsonWebToken.encode(user_id: user.id) if user
   end
 
