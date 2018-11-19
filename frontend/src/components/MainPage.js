@@ -15,6 +15,10 @@ class MainPage extends React.Component {
     })
   };
 
+  state = {
+    shortURL: ''
+  };
+
   componentDidMount() {
     const token = localStorage.getItem('token');
     if (!this.props.authenticated && !token)
@@ -29,13 +33,18 @@ class MainPage extends React.Component {
     this.props.actions.changeOriginalLink(link);
   };
 
-  convertToShort = (isActive) => {
-    if (isActive === 'active')
-      this.props.actions.convertToShortLink();
+  shortLinkChangeHandler = (e) => {
+    e.preventDefault();
+    this.props.actions.shortLinkChange('');
   };
 
-  redirectToUrl = (link) => {
-    this.props.actions.redirectTo(link)
+  convertToShort = () => {
+    this.props.actions.convertToShortLink();
+  };
+
+  redirectToUrl = (currentLink) => {
+    this.props.actions.redirectTo(currentLink);
+    browserHistory.push(`${currentLink.short_link}`);
   };
 
   deleteLinkHandler = () => {
@@ -59,6 +68,7 @@ class MainPage extends React.Component {
   render() {
     const {data, shortLink, originalLink} = this.props;
     const isActive = this.validateUrl() ? 'btn-main' : 'disabled';
+    const shortUrl = `shorten.com/${shortLink}`;
 
     return (
       <div className="main-container">
@@ -71,32 +81,34 @@ class MainPage extends React.Component {
                 <button className={`${isActive}`} onClick={this.convertToShort.bind(null, isActive)}> SHORTEN</button>
               </div> :
               <div className="original-link-input m-t-4">
-                <input type="text" className="link-input" value={`shorten.com/${shortLink}`} placeholder="Past URL here"
-                       onChange={this.inputChangeHandler}/>
+                <input type="text" className="link-input" value={shortUrl} placeholder="Past URL here"
+                       onChange={this.shortLinkChangeHandler}/>
                 <span className="delete-short-link" onClick={this.deleteLinkHandler.bind(this)}>X</span>
-                <button onClick={this.copyLinkAddress.bind(null, shortLink)}> COPY</button>
+                <button className="btn-main copy-btn" onClick={this.copyLinkAddress.bind(null, shortLink)}> COPY</button>
                 <div>
-                  <a href="#" onClick={this.redirectToUrl.bind(null, originalLink)}>{originalLink}</a> shortening
+                  <a href="#" onClick={this.redirectToUrl.bind(null, originalLink)}>{originalLink} shortening</a>
                 </div>
-
               </div>
 
             }
           </div>
         </div>
 
-        <div className="left-container">
+        {data && data.length> 0 ?
+          <div className="left-container">
           <div className="short-url-list-container">
             {data.map((item, index) =>
               <div className="url-item-block" key={index}>
                 <div>
-                  <a href={`/${item.short_link}`} onClick={this.redirectToUrl.bind(null, item.id)}>{`shorten.com/${item.short_link}`}</a>
+                  <a href="#" onClick={this.redirectToUrl.bind(null, item)}>{`shorten.com/${item.short_link}`}</a>
                 </div>
               </div>
             )}
           </div>
 
-        </div>
+        </div> :
+          <p>Add url </p>
+        }
       </div>
     )
   }

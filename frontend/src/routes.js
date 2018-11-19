@@ -5,6 +5,7 @@ import MainPage from "./containers/MainPage.container";
 import { IndexRoute, Route } from "react-router";
 import Login from "./containers/Login.container";
 import Register from "./containers/Register.container";
+import RedirectContainer from "./containers/RedirectContainer.container";
 
 
 export default (
@@ -13,6 +14,7 @@ export default (
       <Route path="login" component={Login}/>
       <Route path="register" component={Register}/>
       <IndexRoute component={MainPage}/>
+      <Route path="*" component={RedirectContainer}/>
     </Route>
   </Route>
 )

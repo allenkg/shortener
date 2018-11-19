@@ -24,9 +24,6 @@
     margin: auto;
     width: 50%;
 }
-.left-container {
-
-}
 
 .top-container {
     width: 100%;
@@ -39,7 +36,9 @@
 }
 
 .disabled {
-    width: 30%;
+    width: 29%;
+    position: relative;
+    right: 1px;
     background-image: linear-gradient(-111deg, #F16534 4%, #ED3535 100%);
     pointer-events: none;
     opacity: 0.6;
@@ -49,15 +48,24 @@
 .original-link-input input {
     width: 70%;
     height: 30px;
+    color: #F16534
 }
 
 .link-input {
-    border-color: #F16534;
+    border: 1px solid #F16534;
+    padding: 10px;
+}
+.link-input textarea:focus, input:focus{
+    outline: none;
 }
 .btn-main {
-    width: 30%;
-    background-image: linear-gradient(-111deg, #F16534 4%, #ED3535 100%);
+    background-image: linear-gradient(-111deg, #ED3535 4%, #F16534 100%);
     height: 30px;
+    border-color: #F16534;
+    color: white;
+    width: 29%;
+    position: relative;
+    right: 1px;
 }
 .m-t {
     margin-top: 10px;
@@ -80,7 +88,6 @@ body, html {
     font-family: Poppins-Regular, sans-serif;
 }
 
-/*---------------------------------------------*/
 a {
     font-family: Open Sans;
     font-size: 14px;
@@ -129,10 +136,6 @@ ul, li {
 .limiter textarea {
     outline: none;
     border: none;
-}
-
-.limiter textarea:focus, input:focus {
-    border-color: transparent !important;
 }
 
 .limiter input:focus::-webkit-input-placeholder { color:transparent; }
@@ -488,4 +491,47 @@ iframe {
         visibility: visible;
         opacity: 1;
     }
+}
+
+/* SPINNER */
+
+h1 {
+    font: 2em 'Roboto', sans-serif;
+    margin-bottom: 40px;
+}
+
+#loading {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(255,255,255,.3);
+    border-radius: 50%;
+    border-top-color: #F16534;
+    animation: spin 5s ease-in-out infinite;
+    -webkit-animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { -webkit-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+    to { -webkit-transform: rotate(360deg); }
+}
+.original-link-input a {
+    color: #000;
+    text-decoration: none;
+    font-size: 10px;
+}
+
+.delete-short-link{
+    position: relative;
+    top: 2px;
+    right: 25px;
+    cursor: pointer;
+    color: #F16534;
+}
+.copy-btn {
+    width: 28%;
+    position: relative;
+    right: 12px;
 }

@@ -4,5 +4,6 @@ Rails.application.routes.draw do
     post 'register', to: 'users#create'
 
     resources :links
+    resources :tracker
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_18_123047) do
+ActiveRecord::Schema.define(version: 2018_11_19_072105) do
 
   create_table "links", force: :cascade do |t|
     t.string "orig_link"
@@ -33,6 +33,16 @@ ActiveRecord::Schema.define(version: 2018_11_18_123047) do
     t.index ["owner_id", "owner_type"], name: "index_shortened_urls_on_owner_id_and_owner_type"
     t.index ["unique_key"], name: "index_shortened_urls_on_unique_key", unique: true
     t.index ["url"], name: "index_shortened_urls_on_url"
+  end
+
+  create_table "trackers", force: :cascade do |t|
+    t.string "location"
+    t.integer "user_id"
+    t.integer "link_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["link_id"], name: "index_trackers_on_link_id"
+    t.index ["user_id"], name: "index_trackers_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
