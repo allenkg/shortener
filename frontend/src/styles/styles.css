@@ -66,6 +66,7 @@
     width: 29%;
     position: relative;
     right: 1px;
+    cursor: pointer;
 }
 .m-t {
     margin-top: 10px;

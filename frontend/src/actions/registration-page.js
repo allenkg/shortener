@@ -27,11 +27,11 @@ function changePassConf(confPass) {
   return {type: CHANGE_PASSWORD_CONFIRMATION, confPass}
 }
 
-function register() {
+function register(admin) {
   return (dispatch, getState) => {
     dispatch({type: REQUEST_REGISTRATION});
     const {name, email, password, confirmPassword} = getState().registerPage;
-    return post('/api/register', {name, email, password, password_confirmation: confirmPassword})
+    return post('/api/register', {name, email, password, password_confirmation: confirmPassword, staff: !!admin})
       .then((response) => {
         console.log('RESPONSE ===> ', response);
         const {auth_token, user} = response;
@@ -40,6 +40,7 @@ function register() {
         localStorage.setItem('token', auth_token);
         localStorage.setItem('user_name', user.name);
         localStorage.setItem('email', user.email);
+        localStorage.setItem('admin', user.staff);
         dispatch(push('/'));
         dispatch({type: REQUEST_REGISTRATION_SUCCESS})
       })

@@ -19,6 +19,10 @@ gem 'jwt'
 gem 'geoip-rails'
 gem 'geoip'
 
+gem 'rabl'
+
+gem 'oj'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

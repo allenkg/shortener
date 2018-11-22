@@ -5,6 +5,7 @@ import {browserHistory} from "react-router";
 class Register extends React.Component {
   static PropTypes = {
     data: PropTypes.array.isRequired,
+    admin: PropTypes.bool,
     actions: PropTypes.shape({
       changeName: PropTypes.func.isRequired,
       changeEmail: PropTypes.func.isRequired,
@@ -42,7 +43,7 @@ class Register extends React.Component {
 
   registerHandler = (e) => {
     e.preventDefault();
-    this.props.actions.register();
+    this.props.actions.register(this.props.admin);
   };
 
 

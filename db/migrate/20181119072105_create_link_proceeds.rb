@@ -1,6 +1,6 @@
-class CreateTrackers < ActiveRecord::Migration[5.2]
+class CreateLinkProceeds < ActiveRecord::Migration[5.2]
   def change
-    create_table :trackers do |t|
+    create_table :link_proceeds do |t|
       t.string :location
       t.references :user, foreign_key: true
       t.references :link, foreign_key: true

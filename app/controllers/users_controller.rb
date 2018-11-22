@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   # return authenticated token upon signup
   def create
     user = User.create!(user_params)
-    auth_token = AuthenticateUser.new(user.email, user.password).call
+    auth_token = AuthenticateUser.new(user.email, user.password, user.staff).call
     response = { message: Message.account_created, auth_token: auth_token, user: user }
     json_response(response, :created)
   end
@@ -16,7 +16,8 @@ class UsersController < ApplicationController
         :name,
         :email,
         :password,
-        :password_confirmation
+        :password_confirmation,
+        :staff
     )
   end
 end

@@ -1,22 +1,22 @@
-class TrackerController < ApplicationController
+class LinkProceedsController < ApplicationController
   before_action :authorize_request
   before_action :tracker_params, only: [:show, :update, :destroy]
 
 
   def index
-    @trackers = Tracker.all
-    json_response(@trackers)
+    @link_proceeds = LinkProceed.all
+    json_response(@link_proceeds)
   end
 
   def show
-    Tracker.create(tracker_params)
+    LinkProceed.create(tracker_params)
     json_response({status: 302, redirect_link: @link.orig_link})
   end
 
   def create
-    @tracker = Tracker.create(tracker_params)
-    if @tracker.save
-      json_response(@tracker, :created)
+    @link_proceed = LinkProceed.create(tracker_params)
+    if @link_proceed.save
+      json_response(@link_proceed, :created)
     else
       json_response({error: 'Error check'})
     end

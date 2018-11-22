@@ -13,6 +13,7 @@ import {
 
 const INITIAL_STATE = {
   data: [],
+  userURLs: [],
   originalLink: '',
   shortLink: '',
   isLoading: false,
@@ -20,9 +21,21 @@ const INITIAL_STATE = {
   linkObject: {}
 };
 
+function getUserShortURLs(data) {
+  const userId = localStorage.getItem('user_id');
+  return data.reduce((acc, item) => {
+    if (item.user_id == userId)
+      acc.push(item);
+    return acc
+  }, []);
+}
+
 export default createReducer({
+  [FETCH_DATA]: (state) => merge(state, { isLoading: true }),
   [FETCH_DATA_SUCCESS]: (state, action) => merge(state, {
-    data: action.data
+    data: action.data,
+    userURLs: getUserShortURLs(action.data),
+    isLoading: false
   }),
   [CHANGE_ORIGINAL_LINK]: (state, action) => merge(state, {
     originalLink: action.link

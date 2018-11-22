@@ -10,13 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_19_072105) do
+ActiveRecord::Schema.define(version: 2018_11_22_061403) do
+
+  create_table "link_proceeds", force: :cascade do |t|
+    t.string "location"
+    t.integer "user_id"
+    t.integer "link_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["link_id"], name: "index_link_proceeds_on_link_id"
+    t.index ["user_id"], name: "index_link_proceeds_on_user_id"
+  end
 
   create_table "links", force: :cascade do |t|
     t.string "orig_link"
     t.string "short_link"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.boolean "deleted", default: false
+    t.index ["user_id"], name: "index_links_on_user_id"
   end
 
   create_table "shortened_urls", force: :cascade do |t|
@@ -35,22 +48,13 @@ ActiveRecord::Schema.define(version: 2018_11_19_072105) do
     t.index ["url"], name: "index_shortened_urls_on_url"
   end
 
-  create_table "trackers", force: :cascade do |t|
-    t.string "location"
-    t.integer "user_id"
-    t.integer "link_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["link_id"], name: "index_trackers_on_link_id"
-    t.index ["user_id"], name: "index_trackers_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "staff"
   end
 
 end

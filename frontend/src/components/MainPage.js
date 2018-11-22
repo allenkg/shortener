@@ -1,10 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {browserHistory} from "react-router";
+import {Link} from 'react-router';
 
 class MainPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      shortURL: '',
+      links: props.userURLs
+    }
+  }
+
   static PropTypes = {
+    isLoading: PropTypes.bool.isRequired,
     data: PropTypes.array.isRequired,
+    userURLs: PropTypes.array.isRequired,
     actions: PropTypes.shape({
       fetchUrls: PropTypes.func.isRequired,
 
@@ -13,10 +24,6 @@ class MainPage extends React.Component {
       redirectTo: PropTypes.func,
       deleteLink: PropTypes.func,
     })
-  };
-
-  state = {
-    shortURL: ''
   };
 
   componentDidMount() {
@@ -65,14 +72,29 @@ class MainPage extends React.Component {
     }
   };
 
+  myLinksClickHandler = () => {
+    this.setState({ links: this.props.userURLs})
+  };
+
+  allLinksClickHandler = () => {
+    this.setState({ links: this.props.data })
+  };
+
+
   render() {
-    const {data, shortLink, originalLink} = this.props;
+    const {isLoading, shortLink, originalLink, userURLs} = this.props;
     const isActive = this.validateUrl() ? 'btn-main' : 'disabled';
     const shortUrl = `shorten.com/${shortLink}`;
+    const isAdmin = localStorage.getItem('admin');
+    const links = this.state.links.length > 0 ? this.state.links :userURLs;
+
+    if (isLoading)
+      return ( <div id="loading"/>);
 
     return (
       <div className="main-container">
         <div className="top-container">
+          { isAdmin && <Link to="/admin/"> Admin panel</Link>}
           <div className="content-center">
             {this.props.shortLink.length === 0 ?
               <div className="original-link-input m-t-4">
@@ -94,21 +116,29 @@ class MainPage extends React.Component {
           </div>
         </div>
 
-        {data && data.length> 0 ?
-          <div className="left-container">
-          <div className="short-url-list-container">
-            {data.map((item, index) =>
-              <div className="url-item-block" key={index}>
-                <div>
-                  <a href="#" onClick={this.redirectToUrl.bind(null, item)}>{`shorten.com/${item.short_link}`}</a>
-                </div>
-              </div>
-            )}
+        <div className="content-block">
+          <div className="left-block">
+            <ul>
+              <li onClick={this.myLinksClickHandler}> My shorten URLs </li>
+              <li onClick={this.allLinksClickHandler}> All shorten URLs </li>
+            </ul>
           </div>
 
-        </div> :
-          <p>Add url </p>
-        }
+          <div className="main-block">
+            { links.map((link, index) =>
+              <div className="url-item-block" key={index}>
+                <div>
+                  <a href="#" onClick={this.redirectToUrl.bind(null, link)}>{`shorten.com/${link.short_link}`}</a>
+                </div>
+              </div>
+            )
+
+            }
+          </div>
+        </div>
+
+
+
       </div>
     )
   }

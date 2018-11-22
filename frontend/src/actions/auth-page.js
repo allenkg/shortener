@@ -27,6 +27,7 @@ function login() {
       localStorage.setItem('token', auth_token);
       localStorage.setItem('user_name', user.name);
       localStorage.setItem('user_id', user.id);
+      localStorage.setItem('admin', user.staff);
       dispatch(push('/'));
     }).catch((errors) => {
       dispatch({type: REQUEST_FAILURE, errors})
