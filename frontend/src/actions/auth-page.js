@@ -7,6 +7,7 @@ export const REQUEST_FAILURE = 'LOGIN_PAGE/REQUEST_FAILURE';
 export const CHANGE_EMAIL = 'LOGIN_PAGE/CHANGE_EMAIL';
 export const CHANGE_PASSWORD = 'LOGIN_PAGE/CHANGE_PASSWORD';
 export const LOGOUT = 'LOGIN_PAGE/LOGOUT';
+export const ALREADY_LOG_IN = 'LOGIN_PAGE/ALREADY_LOG_IN';
 
 function changeEmail(email) {
   return {type: CHANGE_EMAIL, email}
@@ -28,11 +29,17 @@ function login() {
       localStorage.setItem('user_name', user.name);
       localStorage.setItem('user_id', user.id);
       localStorage.setItem('admin', user.staff);
+      localStorage.setItem('authenticated', true);
       dispatch(push('/'));
     }).catch((errors) => {
-      dispatch({type: REQUEST_FAILURE, errors})
+      dispatch({type: REQUEST_FAILURE, errors});
+      dispatch(push('/'));
     })
   }
+}
+
+function alreadyLogIn() {
+  return { type: ALREADY_LOG_IN }
 }
 
 function logout() {
@@ -43,6 +50,7 @@ export default {
   changeEmail,
   changePassword,
   login,
-  logout
+  logout,
+  alreadyLogIn
 }
 

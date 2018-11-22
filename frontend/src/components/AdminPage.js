@@ -14,11 +14,12 @@ class AdminPage extends React.Component {
   }
 
   render() {
-    console.log(this.props.trackers);
 
     return (
-      <div>
-        ADMIN panel
+      <div className="main-container">
+        <div className="content-block">
+          REPORT
+        </div>
       </div>
     );
   }

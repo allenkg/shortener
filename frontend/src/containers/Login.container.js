@@ -5,9 +5,7 @@ import Login from '../components/Login';
 
 
 function mapStateToProps(state) {
-  return {
-    ...state.authPage,
-  }
+  return state.authPage
 }
 
 function mapDispatchToProps(dispatch) {

@@ -41,6 +41,7 @@ function register(admin) {
         localStorage.setItem('user_name', user.name);
         localStorage.setItem('email', user.email);
         localStorage.setItem('admin', user.staff);
+        localStorage.setItem('user_id', user.id);
         dispatch(push('/'));
         dispatch({type: REQUEST_REGISTRATION_SUCCESS})
       })

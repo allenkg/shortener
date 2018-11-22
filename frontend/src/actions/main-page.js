@@ -63,6 +63,7 @@ function convertToShortLink() {
 }
 
 function redirectTo(currentLinkObject) {
+  localStorage.setItem('link_id', currentLinkObject.id);
   return { type: REDIRECT_TO, currentLinkObject }
 }
 
@@ -74,7 +75,7 @@ function setTracker(id) {
   return (dispatch) => {
     const token = localStorage.getItem('token');
     dispatch({ type: SET_TRACKER });
-    return get(`/api/tracker/${id}`, token)
+    return get(`/api/link_proceeds/${id}`, token)
       .then((response) => {
         window.location.replace(response.redirect_link)
       })

@@ -12,9 +12,8 @@ class RedirectContainer extends React.Component {
   };
 
   componentDidMount() {
-    if (this.props.linkObject.orig_link) {
-      this.props.actions.setTracker(this.props.linkObject.id);
-    }
+    const linkProceedId = localStorage.getItem('link_id');
+    this.props.actions.setTracker(linkProceedId);
   }
 
   componentWillUnmount() {
@@ -25,11 +24,7 @@ class RedirectContainer extends React.Component {
 
     return (
       <div>
-        {
-          !!this.props.linkObject.orig_link ?
-            <div className="content-center" id="loading"/> :
-            <NotFound/>
-        }
+        <div className="content-center" id="loading"/>
       </div>
     );
   }

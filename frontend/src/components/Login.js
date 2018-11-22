@@ -34,6 +34,11 @@ class Login extends React.Component {
     browserHistory.push('/register')
   };
 
+  componentDidMount() {
+    if (localStorage.getItem('authenticated') === 'true')
+      browserHistory.push('/')
+  }
+
 
   render() {
     const {password, email} = this.props;
