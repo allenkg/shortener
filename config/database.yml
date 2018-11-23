@@ -13,8 +13,8 @@ default: &default
 
 development:
   <<: *default
-    database: shortener
-    url:
+  database: shortener
+  url:
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
