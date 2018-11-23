@@ -25,6 +25,4 @@ test:
 
 production:
   <<: *default
-  database: shortener
-  username: shortUser
-  password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
