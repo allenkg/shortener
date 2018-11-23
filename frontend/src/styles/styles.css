@@ -29,7 +29,7 @@ body {
     padding: 5px;
 }
 .url-item-block {
-    width: 35%;
+    width: 50%;
     height: 30px;
     margin: 5px;
     border: 1px solid #cccccc;
@@ -617,7 +617,7 @@ h1 {
 }
 .hided {
     display: none;
-    width: 60%;
+    width: 45%;
     margin-left: 10px;
     white-space: nowrap;
     overflow: hidden;
