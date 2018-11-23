@@ -22,10 +22,11 @@ class ShortLinks extends React.Component {
     return (
       <div className="main-block">
         {links.map((link, index) =>
-          <div className="url-item-block" key={index}>
-            <div>
+          <div key={index} className="link-block">
+            <div className="url-item-block" >
               <a href="#" onClick={this.redirectTo.bind(null, link)}>{`${serverPath}${link.short_link}`}</a>
             </div>
+            <div className="hided text-muted">{link.orig_link}</div>
           </div>
         )}
       </div>
