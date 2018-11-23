@@ -26,7 +26,7 @@ class ShortLinks extends React.Component {
             <div className="url-item-block" >
               <a href="#" onClick={this.redirectTo.bind(null, link)}>{`${serverPath}${link.short_link}`}</a>
             </div>
-            <div className="hided text-muted">{link.orig_link}</div>
+            <div className="hided"><span className="text-muted">{link.orig_link}</span></div>
           </div>
         )}
       </div>

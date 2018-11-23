@@ -74,6 +74,7 @@ class TopNavPanel extends React.Component {
       <div className="top-container">
         {authenticated &&
         <div className="top-navigation-bar">
+          <div className="home-link"> <Link to="/"> Home </Link> </div>
           <div className="content-center">
 
             {this.props.shortLink.length === 0 ?
@@ -95,9 +96,8 @@ class TopNavPanel extends React.Component {
             }
           </div>
           <div className="top-menu-right-nav-bar">
-            <div> <Link to="/"> Home </Link> </div>
             <div> {isAdmin === 'true' && <Link to="/admin/"> Admin panel</Link>} </div>
-            <div className="logout" onClick={this.logoutClickHandler}>Log out</div>
+            <div className="logout" onClick={this.logoutClickHandler}><a href="#">Log out</a></div>
           </div>
         </div>
         }
