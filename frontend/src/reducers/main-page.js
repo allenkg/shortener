@@ -7,7 +7,7 @@ import {
   TRANSFORM_LINK,
   TRANSFORM_LINK_SUCCESS,
   TRANSFORM_LINK_FAILURE,
-  DELETE_LINK_SUCCESS, REDIRECT_TO, SET_TRACKER_INITIAL_STATE, SHORT_LINK_CHANGE
+  DELETE_LINK_SUCCESS, REDIRECT_TO, SET_TRACKER_INITIAL_STATE, SHORT_LINK_CHANGE, DELETE_LINK, SET_TRACKER
 } from '../actions/main-page';
 
 import { LOGOUT } from "../actions/auth-page";
@@ -19,10 +19,11 @@ const INITIAL_STATE = {
   shortLink: '',
   isLoading: false,
   linkId: null,
-  linkObject: {}
+  linkObject: {},
+  errors: {}
 };
 
-function getUserShortURLs(data) {
+export function getUserShortURLs(data) {
   const userId = localStorage.getItem('user_id');
   return data.reduce((acc, item) => {
     if (item.user_id == userId)
@@ -47,6 +48,12 @@ export default createReducer({
   [TRANSFORM_LINK]: (state, action) => merge(state, {
     isLoading: true
   }),
+  [DELETE_LINK]: (state, action) => merge(state, {
+    isLoading: true
+  }),
+  [SET_TRACKER]: (state, action) => merge(state, {
+    isLoading: true
+  }),
   [TRANSFORM_LINK_SUCCESS]: (state, action) => merge(state, {
     isLoading: false,
     shortLink: action.data.short_link,
@@ -66,7 +73,6 @@ export default createReducer({
     isLoading: false,
     shortLink: '',
     originalLink: '',
-    errors: action.errors,
     data: state.data.slice(0,-1),
     userURLs: state.userURLs.slice(0,-1),
     linkId: null

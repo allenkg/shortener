@@ -18,6 +18,7 @@ export const REDIRECT_TO = 'MAIN_PAGE/REDIRECT_TO';
 export const SET_TRACKER_INITIAL_STATE = 'MAIN_PAGE/SET_TRACKER_INITIAL_STATE';
 
 export const SET_TRACKER = 'MAIN_PAGE/SET_TRACKER';
+export const SET_TRACKER_SUCCESS = 'MAIN_PAGE/SET_TRACKER_SUCCESS';
 export const SET_TRACKER_FAILURE = 'MAIN_PAGE/SET_TRACKER_FAILURE';
 
 const url = '/api/links';
@@ -77,6 +78,7 @@ function setTracker(id) {
     dispatch({ type: SET_TRACKER });
     return get(`/api/link_proceeds/${id}`, token)
       .then((response) => {
+        dispatch({ type: SET_TRACKER_SUCCESS });
         window.location.replace(response.redirect_link)
       })
       .catch((errors) => dispatch({ type: SET_TRACKER_FAILURE, errors }))

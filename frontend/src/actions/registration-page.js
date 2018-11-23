@@ -33,17 +33,15 @@ function register(admin) {
     const {name, email, password, confirmPassword} = getState().registerPage;
     return post('/api/register', {name, email, password, password_confirmation: confirmPassword, staff: !!admin})
       .then((response) => {
-        console.log('RESPONSE ===> ', response);
         const {auth_token, user} = response;
-
         dispatch({type: REQUEST_SUCCESS, auth_token});
         localStorage.setItem('token', auth_token);
         localStorage.setItem('user_name', user.name);
         localStorage.setItem('email', user.email);
         localStorage.setItem('admin', user.staff);
         localStorage.setItem('user_id', user.id);
+        dispatch({type: REQUEST_REGISTRATION_SUCCESS});
         dispatch(push('/'));
-        dispatch({type: REQUEST_REGISTRATION_SUCCESS})
       })
       .catch((errors) => {
         return {type: REQUEST_REGISTRATION_FAILURE, errors}
