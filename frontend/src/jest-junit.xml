@@ -1,0 +1,6 @@
+<testsuites name="jest tests" tests="1" failures="0" time="2.295">
+  <testsuite name="/__tests__/actions.mainPage.tests.js" errors="0" failures="0" skipped="0" timestamp="2018-11-23T04:07:53" time="0.522" tests="1">
+    <testcase classname="Main page actions-should return FETCH_DATA_SUCCESS when page loaded" name="Main page actions-should return FETCH_DATA_SUCCESS when page loaded" time="0.01">
+    </testcase>
+  </testsuite>
+</testsuites>
