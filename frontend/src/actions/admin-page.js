@@ -28,7 +28,7 @@ function changeOffset(number) {
 function fetchRecords() {
   return (dispatch, getState) => {
     const token = localStorage.getItem('token');
-    const {startId, offset, pageNumber, searchQuery, perPage } = getState().adminPage;
+    const {offset, pageNumber, searchQuery, perPage } = getState().adminPage;
     dispatch({ type: FETCH_RECORDS });
     return get(`/api/admin?offset=${offset}&page_number=${pageNumber}&search_query=${searchQuery}&per_page=${perPage}`, token)
       .then((data) => {

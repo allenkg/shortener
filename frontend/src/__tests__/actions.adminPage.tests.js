@@ -42,7 +42,14 @@ describe("Admin page Actions", () => {
     ];
     fetch.mockResponse(JSON.stringify(data));
 
-    const store = mockStore({});
+    const store = mockStore({
+      adminPage: {
+        offset: 0,
+        pageNumber: 1,
+        searchQuery: '',
+        perPage: 5,
+      }
+    });
     return store.dispatch(adminPageActions.fetchRecords()).then(() => {
       expect(store.getActions()).toEqual(expectedActinos);
     })

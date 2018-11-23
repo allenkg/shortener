@@ -4,14 +4,18 @@ import {
   FETCH_RECORDS_SUCCESS
 } from "../actions/admin-page";
 
-import adminPageActions from "../actions/admin-page";
 import adminPage from "../reducers/admin-page";
 
 const INITIAL_STATE = {
   trackers: [],
   trackersLoading: false,
   pageNumber: 1,
-  totalPages: null
+  totalPages: 3,
+  startId: 1,
+  offset: 0,
+  perPage: 5,
+  errors: '',
+  searchQuery: ''
 };
 
 describe('Admin page reducer', () => {
