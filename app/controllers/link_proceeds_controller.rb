@@ -18,7 +18,7 @@ class LinkProceedsController < ApplicationController
     if @link_proceed.save
       json_response(@link_proceed, :created)
     else
-      json_response({error: 'Error check'})
+      json_response({error: 'Error check'}, 422)
     end
   end
 

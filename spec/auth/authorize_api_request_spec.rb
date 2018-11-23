@@ -26,7 +26,7 @@ RSpec.describe AuthorizeApiRequest do
       context 'when missing token' do
         it 'raises a MissingToken error' do
           expect { invalid_request_obj.call }
-            .to raise_error(ExceptionHandler::MissingToken, 'Отсутствует токен')
+            .to raise_error(ExceptionHandler::MissingToken, 'Missing token')
         end
       end
 
@@ -38,7 +38,7 @@ RSpec.describe AuthorizeApiRequest do
 
         it 'raises an InvalidToken error' do
           expect { invalid_request_obj.call }
-            .to raise_error(ExceptionHandler::InvalidToken, /Недопустимый токен/)
+            .to raise_error(ExceptionHandler::InvalidToken, /Invalid token/)
         end
       end
 

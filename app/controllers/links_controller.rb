@@ -12,7 +12,7 @@ class LinksController < ApplicationController
     if @link.save
       json_response(@link, :created)
     else
-      json_response({error: 'Error check'})
+      json_response({error: 'Error check'}, 422)
     end
   end
 

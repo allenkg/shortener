@@ -3,5 +3,4 @@ class LinkProceed < ApplicationRecord
   belongs_to :link
   attr_accessor :remote_ip
 
-
 end

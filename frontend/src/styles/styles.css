@@ -639,3 +639,37 @@ h1 {
 .home-link a {
     text-decoration: none;
 }
+.admin-report-nav-bar {
+    display: block;
+    margin: 10px;
+
+}
+.search-box {
+    display: inline-block;
+    width: 30%;
+}
+.search-box input {
+    height: 30px;
+    width: 80%;
+}
+.search-box span {
+    border: 1px solid gray;
+    font-size: 17px;
+    padding: 2px;
+}
+.page-number {
+    display: inline-block;
+    width: 50px;
+}
+.page-number div {
+    display: inline-block;
+    border: 1px solid orangered;
+    width: 23px;
+    text-align: center;
+    margin: 1px;
+    cursor: pointer;
+    height: 23px;
+}
+.offset {
+    display: inline-block;
+}
