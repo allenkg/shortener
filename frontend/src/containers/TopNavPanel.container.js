@@ -47,8 +47,9 @@ class TopNavPanel extends React.Component {
     this.props.actions.deleteLink(this.props.linkId)
   };
 
-  copyLinkAddress = (link) => {
-    this.props.actions.redirectTo(link)
+  copyLinkAddress = () => {
+    document.getElementById('copy-link-id').select();
+    window.document.execCommand('copy');
   };
 
   redirectToUrl = (currentLink) => {
@@ -64,7 +65,7 @@ class TopNavPanel extends React.Component {
 
 
   render() {
-    const { shortLink, originalLink, authenticated } = this.props;
+    const { shortLink, originalLink, authenticated, linkId } = this.props;
     const isActive = this.validateUrl() ? 'btn-main' : 'disabled';
     const serverPath = window.location.href;
     const shortUrl = `${serverPath}${shortLink}`;
@@ -84,10 +85,10 @@ class TopNavPanel extends React.Component {
                 <button className={`${isActive}`} onClick={this.convertToShort.bind(null, isActive)}> SHORTEN</button>
               </div> :
               <div className="original-link-input m-t">
-                <input type="text" className="link-input" value={shortUrl} placeholder="Past URL here"
+                <input id="copy-link-id" type="text" className="link-input" value={shortUrl} placeholder="Past URL here"
                        onChange={this.shortLinkChangeHandler}/>
                 <span className="delete-short-link" onClick={this.deleteLinkHandler.bind(this)}>X</span>
-                <button className="btn-main copy-btn" onClick={this.copyLinkAddress.bind(null, shortLink)}> COPY
+                <button className="btn-main copy-btn" onClick={this.copyLinkAddress}> COPY
                 </button>
                 <div id="origin-link">
                   <a href="#" onClick={this.redirectToUrl.bind(null, originalLink)}>{originalLink} shortening</a>

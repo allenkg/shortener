@@ -55,6 +55,7 @@ function convertToShortLink() {
     };
     return post(url, payload, token)
       .then((data) => {
+        localStorage.setItem('link_id', data.id);
         dispatch({ type: TRANSFORM_LINK_SUCCESS, data })
       })
       .catch((errors) => {
