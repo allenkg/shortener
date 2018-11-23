@@ -18,7 +18,20 @@ class AdminPage extends React.Component {
     return (
       <div className="main-container">
         <div className="content-block">
-          REPORT
+          <table className="table">
+            <th>User</th>
+            <th>Shorter</th>
+            <th>Country</th>
+            <th>Time</th>
+            {this.props.trackers && this.props.trackers.map((tracker) =>
+              <tr>
+                <td>{tracker.user_id}</td>
+                <td>{tracker.link_id}</td>
+                <td>{tracker.location}</td>
+                <td>{tracker.created_at}</td>
+              </tr>
+            )}
+          </table>
         </div>
       </div>
     );
